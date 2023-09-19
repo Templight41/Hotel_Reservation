@@ -1,0 +1,260 @@
+@font-face {
+    font-family: "legendtext";
+    src: url("/public/fonts/legend_text-webfont.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: "legendtextitalics";
+    src: url("/public/fonts/legend_text-italic-webfont.woff2") format('woff2');
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+a {
+    color: white;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.header-overlay-container {
+    height: 100vh;
+    position: relative;
+    z-index: 0;
+}
+
+.header-container {
+    height: 80px;
+    width: 80%;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.header {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 12px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#hotel-logo-anchor {
+    position: absolute;
+    height: 150px;
+    width: 180px;
+    background-color: black;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hotel-logo-anchor img {
+    height: 90%;
+}
+
+.left-nav {
+    display: flex;
+    width: 45%;
+    /* height: 100px; */
+    /* background-color: white; */
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.right-nav {
+    display: flex;
+    width: 30%;
+    /* background-color: white; */
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#room-booking-button-main {
+    height: 55px;
+    width: 150px;
+    color: white;
+    background-color: #8d7535;
+    text-align: center;
+    line-height: 55px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.black-gradiant-top {
+    position: absolute;
+    height: 200px;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* background-color: black; */
+    background-image: linear-gradient(rgba(0,0,0,0.7), transparent);
+}
+
+.slideshow-container {
+    position: relative;
+    height: 100vh;
+    z-index: -2;
+}
+
+.slideshow-image-container {
+    position: relative;
+    z-index: -2;
+}
+
+.slideshow-image-list {
+    height: 100%;
+    position: inherit;
+    top:0;
+    left: 0;
+    /* background-color: white; */
+}
+
+.slideshow-images {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    list-style-type: none;
+    transition-duration: 1.5s;
+    opacity: 1;
+}
+
+.slideshow-images img {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    list-style-type: none;
+}
+
+.slideshow-images-hidden {
+    opacity: 0;
+}
+
+.golden-overlay {
+    background-color: transparent;
+    border: 30px solid transparent;
+    border-image: url(/public/assets/border.png) 30 stretch;
+    z-index: 2;
+    position: absolute;
+    top: 12%;
+    left: 10%;
+    right: 10%;
+    bottom: 12%;
+    padding: 5px;
+    border-image-outset: 2px;
+}
+
+.main-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 3;
+}
+
+.hotel-name-container {
+    color: white;
+    display: block;
+    margin: auto 0;
+    top: 41%;
+    bottom: 0;
+    position: relative;
+    margin-left: 100px;
+    width: 50%;
+    z-index: 4;
+}
+
+.hotel-name-container h2 {
+    font-size: 50px;
+    font-family: legendtext;
+    font-weight: normal;
+    padding-left: 25px;
+    line-height: 1.25;
+}
+
+.slideshow-container span {
+    color: white;
+    position: absolute;
+    z-index: 6;
+    top: 48%;
+    bottom: 0;
+    left: 6%;
+    right: 0;
+    font-size: 30px;
+    cursor: pointer;
+    height: 30px;
+    width: 15px;
+}
+
+#right-arrow {
+    /* right: 6%; */
+    left: 92%;
+    /* color: black */
+}
+
+.intro-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.left-column {
+    height: 500px;
+    width: 510px;
+    border: 1px solid black;
+    font-family: legendtext;
+    /* line-gap-override: 5px; */
+}
+
+.left-column h2 {
+    text-align: center;
+    font-size: 36px;
+    color: #000;
+    font-weight: 300;
+}
+
+.right-column {
+    height: 500px;
+    width: 400px;
+    border: 1px solid black;
+}
