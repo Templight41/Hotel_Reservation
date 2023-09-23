@@ -127,6 +127,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 2px;
 }
 
 .black-gradiant-top {
@@ -164,7 +165,7 @@ body {
     left: 0;
     top: 0;
     list-style-type: none;
-    transition-duration: 1.5s;
+    transition-duration: 0.8s;
     opacity: 1;
 }
 
@@ -449,6 +450,39 @@ legend {
     color: #8d7535;
 }
 
+.footer {
+    color: #8d7535;
+}
+
+.footer span {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    height: 30px;
+    margin: 10px;
+}
+
+.footer span a {
+    color: #728aca;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.89);
+    font-family: sans-serif;
+    border-radius: 50%;
+}
+
+.footer span a span svg {
+    height: 20px;
+    width: 20px;
+    filter: invert(100%);
+}
+
 @media (max-width: 920px) {
     .location-elements {
         flex-direction: column;
@@ -511,11 +545,11 @@ legend {
         width: auto;
     }
     #room-booking-button-main {
-        /* position: fixed; */
         width: 100%;
-        /* left: 0; */
-        /* bottom: 0; */
-        /* z-index: 10; */
+        border-radius: 0px;
+    }
+    .booking-button-gap {
+        height: 55px;
     }
 }
 
