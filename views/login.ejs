@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <a id="hotel-logo-anchor" href="/"><img src="/assets/santa_clara_logo02.png" alt=""></a>
+    <div class="image-container">
+        <img src="/assets/Sofitel_Legend_santaclara_homepage_slide01.jpg" alt="">
+    </div>
+    <div class="login-container">
+        <h3>
+            SOFITEL LEGEND
+            SANTA CLARA CARTAGENA
+        </h3>
+        <p>
+            Welcome
+        </p>
+        <form action="/login" method="POST">
+            <div class="username-container">
+                <label for="email">Email</label>
+                <div class="input-container">
+                    <input type="text" id="email">
+                </div>
+            </div>
+            <div class="password-container">
+                <label for="password">Password</label><br>
+                <div class="input-container">
+                    <input type="password" id="password">
+                </div>
+            </div>
+            <a href="/forgot-password" id="forgot-password">forgot password?</a>
+            <button id="signin-button">Sign in</button>
+            <a href="/create-account" id="create-account">Create account</a>
+        </form>
+    </div>
+</body>
+</html>

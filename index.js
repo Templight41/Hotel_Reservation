@@ -22,6 +22,14 @@ app.get("/hello", (req, res) => {
   res.send("Hello World");
 })
 
+app.get("/profile", (req, res) => {
+  res.redirect("/login")
+})
+
+app.get("/login", (req, res) => {
+  res.render("login.ejs")
+})
+
 app.get("/new-booking", (req, res) => {
   res.send("booking")
 })
