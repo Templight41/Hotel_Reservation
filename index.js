@@ -72,7 +72,7 @@ app.post("/create-account", async (req, res) => {
 })
 
 app.get("/login", (req, res) => {
-  res.render("login.ejs")
+  res.render("login.ejs", {errMessage: errMessage, accountExists: accountExists})
 })
 
 app.get("/new-booking", (req, res) => {
