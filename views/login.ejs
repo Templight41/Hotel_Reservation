@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/new-old-login.css">
 </head>
 <body>
     <a id="hotel-logo-anchor" href="/"><img src="/assets/santa_clara_logo02.png" alt=""></a>
@@ -17,13 +17,13 @@
             SANTA CLARA CARTAGENA
         </h3>
         <p>
-            Welcome
+            Welcome back
         </p>
         <form action="/login" method="POST">
             <div class="username-container">
                 <label for="email">Email</label>
                 <div class="input-container">
-                    <input type="text" id="email">
+                    <input type="email" id="email">
                 </div>
             </div>
             <div class="password-container">
@@ -34,7 +34,7 @@
             </div>
             <a href="/forgot-password" id="forgot-password">forgot password?</a>
             <button id="signin-button">Sign in</button>
-            <a href="/create-account" id="create-account">Create account</a>
+            <a href="/create-account" class="create-account-anchor login-anchor">Create account</a>
         </form>
     </div>
 </body>

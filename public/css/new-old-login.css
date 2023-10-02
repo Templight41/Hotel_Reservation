@@ -32,11 +32,35 @@ body {
     width: 50%;
 }
 
+.error-message-container-hidden {
+    height: 20px;
+    margin: 0 auto;
+    width: 300px;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.error-message-container-visible {
+    opacity: 1;
+    transform: translateY(-10px);
+    transition: all 0.6s ease-in-out;
+}
+
+#error-message {
+    color: red;
+}
+
+.error-message-status {
+    position: absolute;
+    display: none;
+}
+
 .login-container h3 {
     text-align: center;
     width: 300px;
     margin: 0 auto;
-    margin-top: 140px;
+    margin-top: 80px;
     color: #8d7535;
     font-family: sans-serif;
 }
@@ -57,7 +81,11 @@ form {
 }
 
 form .username-container {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+}
+
+form .password-container {
+    margin-bottom: 14px;
 }
 
 label {
@@ -81,7 +109,7 @@ input:focus {
 
 #forgot-password {
     display: inline-block;
-    margin: 10px 0px;
+    margin-bottom: 10px;
     width: 100%;
     text-align: end;
     color: #8d7535;
@@ -90,7 +118,8 @@ input:focus {
 #signin-button {
     display: block;
     height: 36px;
-    width: 100px;
+    width: auto;
+    padding: 0px 14px;
     border-radius: 50px;
     border: none;
     background-color: rgb(23, 100, 253);
@@ -98,12 +127,12 @@ input:focus {
     margin: 15px auto;
 }
 
-#create-account {
+.login-anchor {
     margin-top: 20px;
     margin-bottom: 30px;
     display: inline-block;
     text-align: center;
-    color: #8d7535;
+    color: #8d7535 !important;
 }
 
 @media (max-width: 680px) {
@@ -122,7 +151,7 @@ input:focus {
     body {
         flex-direction: column;
         justify-content: flex-start;
-        gap: 40px;
+        gap: 20px;
     }
     .login-container {
         width: auto;
