@@ -14,12 +14,9 @@
     <div class="login-container">
         <div class="error-message-container-hidden" id="error-message-container">
             <p id="error-message">
-                <%if(accountExists){%>
-                    <%=errMessage%>
-                <%}%>
             </p>
         </div>
-        <p class="error-message-status"><%=accountExists%></p>
+        <p class="error-message-status"></p>
         <h3>
             SOFITEL LEGEND
             SANTA CLARA CARTAGENA
@@ -27,7 +24,7 @@
         <p>
             Welcome
         </p>
-        <form action="/create-account" method="post">
+        <form>
             <div class="name-container username-container">
                 <label for="name">Full name</label>
                 <div class="input-container">
@@ -58,7 +55,8 @@
         <p id="result"></p>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/js/password-rechecking.js"></script>
-    <script src="/js/errorMessageLoginCreate.js"></script>
+    <script src="/js/sendNewAccountPOST.js"></script>
 </body>
 </html>

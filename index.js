@@ -1,26 +1,29 @@
 const mysql = require('mysql2');
 const express = require('express');
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 const app = express();
-const path = require('path')
-require('dotenv').config()
+const path = require('path');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({extended: true}));
-app.use(express.json())
+app.use(express.json());
+app.use(cookieParser());
 
-app.listen(8080, console.log("listening on port 8080"))
+app.listen(8080, console.log("listening on port 8080"));
 
 // // Create the connection to the database
-const connection = mysql.createConnection(process.env.DATABASE_URL)
+const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 
 
-let errMessage = "Account already exists";
-let accountExists = false;
+// let errMessage = "Account already exists";
+// let accountExists = false;
 
 
 app.get('/', (req, res) => {
@@ -39,8 +42,7 @@ app.get("/profile", (req, res) => {
 })
 
 app.get("/create-account", (req, res) => {
-  res.render("create-account", {errMessage: errMessage, accountExists: accountExists})
-  // accountExists = false;
+  res.render("create-account")
 })
 
 app.post("/create-account", async (req, res) => {
@@ -50,25 +52,26 @@ app.post("/create-account", async (req, res) => {
       console.log(results) // results contains rows returned by server
       console.log(fields) // fields contains extra metadata about results, if available
       console.log(err)
-      if(err.code == "ER_DUP_ENTRY") {
-        res.redirect("/create-account")
+      if(err != null) {
+        res.status(200).json({status: "Account already exists"})
+        // console.log(err)
+        // res.send("Account already exists")
+      } else {
+        const token = jwt.sign({email: req.body.email}, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+        res.cookie("token", token, {
+          httpOnly: true,
+        })
+        res.status(201).json({
+          status: "success",
+          token: token,
+        })
       }
     })
-    connection.end()
-    // res.send("success")
-    // res.redirect("/login")
+    
   }
-  catch {
-    res.redirect("/create-account")
+  catch(err) {
+    console.log(err)
   }
-  // connection.query(`SELECT * FROM users`, function (err, results, fields) {
-  //   nameAns = results[0].name
-  //   console.log(nameAns)
-  //   console.log(fields)
-  //   console.log(results)
-  //   res.send(nameAns)
-  // })
-  // connection.end()
 })
 
 app.get("/login", (req, res) => {
