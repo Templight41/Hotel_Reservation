@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 #hotel-logo-anchor {
@@ -33,22 +33,21 @@ body {
 }
 
 .error-message-container-hidden {
-    height: 20px;
+    /* height: 20px; */
     margin: 0 auto;
-    width: 300px;
+    width: auto;
     text-align: center;
-    opacity: 0;
-    transition: all 0.3s ease-in-out;
+    margin: 10px auto;
 }
 
 .error-message-container-visible {
     opacity: 1;
-    transform: translateY(-10px);
     transition: all 0.6s ease-in-out;
 }
 
 #error-message {
     color: red;
+    margin: 0;
 }
 
 .error-message-status {
@@ -60,14 +59,13 @@ body {
     text-align: center;
     width: 300px;
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 200px;
     color: #8d7535;
     font-family: sans-serif;
 }
 
 .login-container p {
     text-align: center;
-    width: 300px;
     margin: 40px auto;
     font-family: serif;
 }
@@ -152,6 +150,7 @@ input:focus {
         flex-direction: column;
         justify-content: flex-start;
         gap: 20px;
+        overflow-y: auto;
     }
     .login-container {
         width: auto;
@@ -162,7 +161,7 @@ input:focus {
         height: 35%;
     }
     .login-container h3 {
-        margin: 0;
+        margin: 30px auto;
     }
     .login-container p {
         margin: 15px auto;

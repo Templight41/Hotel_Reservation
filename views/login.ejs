@@ -12,10 +12,6 @@
         <img src="/assets/Sofitel_Legend_santaclara_homepage_slide01.jpg" alt="">
     </div>
     <div class="login-container">
-        <div class="error-message-container-hidden" id="error-message-container">
-            <p id="error-message">
-            </p>
-        </div>
         <p class="error-message-status"></p>
         <h3>
             SOFITEL LEGEND
@@ -37,11 +33,16 @@
                     <input type="password" id="password" name="password" placeholder="password">
                 </div>
             </div>
+            <div class="error-message-container-hidden" id="error-message-container">
+                <p id="error-message">
+                </p>
+            </div>
             <a href="/forgot-password" id="forgot-password">forgot password?</a>
             <button id="signin-button">Sign in</button>
             <a href="/create-account" class="create-account-anchor login-anchor">Create account</a>
         </form>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/loginPost.js"></script>
 </body>
 </html>
