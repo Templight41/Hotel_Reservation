@@ -10,6 +10,7 @@ require('dotenv').config();
 
 const {createAccountPost} = require('./routes/signup.js');
 const {loginPost} = require('./routes/signin.js');
+const {authenticateToken} = require('./routes/authenticateToken.js');
 
 app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -31,10 +32,17 @@ app.get('/', (req, res) => {
   res.render("home.ejs")
 })
 
-app.get("/test", (req, res) => {
-  res.type('application/json')
-  res.header({test: "Hello World"})
-  res.send("Hello World")
+app.get("/test",authenticateToken, (req, res) => {
+  try {
+    connection.query(`SELECT * FROM users WHERE email = '${req.email.email}'`, async function (err, results, fields) {
+      console.log(results)
+      console.log(req.email)
+    })
+  }
+  catch(err) {
+    console.log(err)
+  }
+  res.json()
 })
 
 app.get("/profile", (req, res) => {
@@ -52,6 +60,11 @@ app.get("/login", (req, res) => {
 })
 
 app.post("/login", loginPost)
+
+app.get("/logout", (req, res) => {
+  res.clearCookie("token")
+  res.redirect("/")
+})
 
 app.get("/new-booking", (req, res) => {
   res.send("booking")
