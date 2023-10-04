@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const {createAccountPost} = require('./routes/signup.js');
 const {loginPost} = require('./routes/signin.js');
-const {authenticateToken} = require('./routes/authenticateToken.js');
+const {authenticateToken} = require('./routes/reAuthenticateToken.js');
 
 app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -65,6 +65,24 @@ app.get("/logout", (req, res) => {
   res.clearCookie("token")
   res.redirect("/")
 })
+
+app.get("/reset-password", (req, res) => {
+  res.render("reset-password")
+})
+
+app.post("/reset-password", (req, res) => {
+  const token = jwt.sign({email: req.body.email, type: req.body.type}, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
+    res.cookie("token", token, {
+      httpOnly: true,
+    })
+    res.status(201).json({
+    status: "password match",
+    token: token,
+    })
+    console.log(token)
+    console.log(req.body.type)
+  }
+)
 
 app.get("/new-booking", (req, res) => {
   res.send("booking")

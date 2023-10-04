@@ -9,6 +9,7 @@ document.querySelector('button').addEventListener("click", (e) => {
         name: document.querySelector("#name").value,
         email: document.querySelector("#email").value,
         password: document.querySelector("#password").value,
+        type: "create-account",
       },
       {
         headers: {

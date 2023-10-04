@@ -2,8 +2,9 @@ require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql2');
+import { Resend } from 'resend';
 
-
+const resend = new Resend(process.env.RESEND_API_KEY);
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 exports.createAccountPost = async (req, res) => {
@@ -24,6 +25,19 @@ exports.createAccountPost = async (req, res) => {
                     status: "success",
                     token: token,
                 })
+                (async function () {
+                    try {
+                      const data = await resend.emails.send({
+                        from: 'Arsanya <noreply@arsanya.in>',
+                        to: [`${req.body.email}`],
+                        subject: 'Account Created!',
+                        html: '<strong>It works!</strong>',
+                      });
+                      console.log(data);
+                    } catch (error) {
+                      console.error(error);
+                    }
+                  })();
             }
             })
     }

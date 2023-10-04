@@ -5,10 +5,9 @@ document.querySelector('form').addEventListener("submit", (e) => {
 
 // sending POST request to server
 document.querySelector('button').addEventListener("click", (e) => {
-    axios.post('/login', {
+    axios.post('/reset-password', {
         email: document.querySelector("#email").value,
-        password: document.querySelector("#password").value,
-        type: "login",
+        type: "reset",
       },
       {
         headers: {

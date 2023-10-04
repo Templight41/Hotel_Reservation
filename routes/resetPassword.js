@@ -19,7 +19,24 @@ exports.loginPost = async (req, res) => {
                         status: "password match",
                         token: token,
                         })
+
+                        //sending email
+                        (async function () {
+                            try {
+                              const data = await resend.emails.send({
+                                from: 'Arsanya <noreply@arsanya.in>',
+                                to: [`${req.body.email}`],
+                                subject: 'Account Created!',
+                                html: '<strong>It works!</strong>',
+                              });
+                              console.log(data);
+                            } catch (error) {
+                              console.error(error);
+                            }
+                          })();
                     }
+
+                    
                     else {
                         res.status(200).json({ status : "Username and password does not match" });
                     }
