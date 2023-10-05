@@ -2,7 +2,7 @@ require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql2');
-import { Resend } from 'resend';
+const {Resend} = require('resend');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const connection = mysql.createConnection(process.env.DATABASE_URL);
@@ -17,7 +17,7 @@ exports.createAccountPost = async (req, res) => {
             if(err != null) {
                 res.status(200).json({status: "Account already exists"})
             } else {
-                const token = jwt.sign({email: req.body.email}, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+                const token = jwt.sign({email: req.body.email, type: req.body.type}, process.env.JWT_SECRET_KEY, { expiresIn: '5s' });
                     res.cookie("token", token, {
                     httpOnly: true,
                 })
@@ -25,19 +25,20 @@ exports.createAccountPost = async (req, res) => {
                     status: "success",
                     token: token,
                 })
-                (async function () {
+                async function resendEmail() {
                     try {
                       const data = await resend.emails.send({
                         from: 'Arsanya <noreply@arsanya.in>',
                         to: [`${req.body.email}`],
                         subject: 'Account Created!',
-                        html: '<strong>It works!</strong>',
+                        html: `<strong>Welcome ${req.body.name}</strong>`,
                       });
                       console.log(data);
                     } catch (error) {
                       console.error(error);
                     }
-                  })();
+                  }
+                  resendEmail();
             }
             })
     }

@@ -10,6 +10,7 @@ require('dotenv').config();
 
 const {createAccountPost} = require('./routes/signup.js');
 const {loginPost} = require('./routes/signin.js');
+const {resetPasswordPost} = require('./routes/resetPassword.js');
 const {authenticateToken} = require('./routes/reAuthenticateToken.js');
 
 app.use(express.urlencoded({extended: true}));
@@ -45,7 +46,7 @@ app.get("/test",authenticateToken, (req, res) => {
   res.json()
 })
 
-app.get("/profile", (req, res) => {
+app.get("/profile", authenticateToken, (req, res) => {
   res.redirect("/login")
 })
 
@@ -59,7 +60,7 @@ app.get("/login", (req, res) => {
   res.render("login.ejs")
 })
 
-app.post("/login", loginPost)
+app.post("/login", authenticateToken, loginPost)
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token")
@@ -70,21 +71,9 @@ app.get("/reset-password", (req, res) => {
   res.render("reset-password")
 })
 
-app.post("/reset-password", (req, res) => {
-  const token = jwt.sign({email: req.body.email, type: req.body.type}, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
-    res.cookie("token", token, {
-      httpOnly: true,
-    })
-    res.status(201).json({
-    status: "password match",
-    token: token,
-    })
-    console.log(token)
-    console.log(req.body.type)
-  }
-)
+app.post("/reset-password", resetPasswordPost)
 
-app.get("/new-booking", (req, res) => {
+app.get("/new-booking", authenticateToken, (req, res) => {
   res.send("booking")
 })
 

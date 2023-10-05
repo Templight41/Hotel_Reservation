@@ -5,7 +5,7 @@ exports.authenticateToken = (req, res, next) => {
     if(token == null) return res.sendStatus(401)
 
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, email) => {
-        if(err) return res.sendStatus(403)
+        if(err) return res.redirect("/login")
         req.email = email
         next()
     })
