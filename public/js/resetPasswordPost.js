@@ -15,11 +15,12 @@ document.querySelector('button').addEventListener("click", (e) => {
         }
       })
       .then((res) => {
-        if (res.data.status == "password match") {
-            window.location.href = "/booking"
-        } else {
-            document.querySelector('#error-message').innerHTML = res.data.status;
-            document.querySelector('#error-message-container').className += " error-message-container-visible";
+        document.querySelector('#error-message').innerHTML = res.data.status;
+        document.querySelector('#error-message-container').className += " error-message-container-visible";
+        if(res.data.status === "link sent to the given email") {
+          document.querySelector('button').disabled = true;
+          document.querySelector('button').style.cursor = "not-allowed";
+          document.querySelector('button').style.backgroundColor = "grey";
         }
       })
 });

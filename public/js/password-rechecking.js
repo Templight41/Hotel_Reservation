@@ -10,6 +10,7 @@ let isCorrectEmail;
 
 logSignButton.setAttribute("disabled", true);
 logSignButton.style.backgroundColor = "grey"
+logSignButton.style.cursor = "not-allowed";
 
 firstPass.addEventListener("input", (e) => {
     firstValue = e.target.value;
@@ -35,14 +36,17 @@ function check() {
     if(firstValue!==secondValue || firstValue == "" || secondValue=="" || firstValue==undefined || secondValue==undefined || nameValue=="") {
         logSignButton.setAttribute("disabled", true);
         logSignButton.style.backgroundColor = "grey"
+        logSignButton.style.cursor = "not-allowed";
     }
     else if(!isCorrectEmail) {
         logSignButton.setAttribute("disabled", true);
         logSignButton.style.backgroundColor = "grey"
+        logSignButton.style.cursor = "not-allowed";
     }
     else {
         logSignButton.removeAttribute("disabled", true);
         logSignButton.style.backgroundColor = blueBackgroundValue
+        logSignButton.style.cursor = "not-allowed";
     }
 }
 

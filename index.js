@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const {createAccountPost} = require('./routes/signup.js');
 const {loginPost} = require('./routes/signin.js');
-const {resetPasswordPost} = require('./routes/resetPassword.js');
+const {resetPasswordPost} = require('./routes/resetPasswordEmail.js');
 const {authenticateToken} = require('./routes/reAuthenticateToken.js');
 
 app.use(express.urlencoded({extended: true}));
@@ -68,10 +68,27 @@ app.get("/logout", (req, res) => {
 })
 
 app.get("/reset-password", (req, res) => {
-  res.render("reset-password")
+  res.render("reset-password", {emailSent: false, tokenStatus: undefined, errorMessage: ""})
 })
 
-app.post("/reset-password", resetPasswordPost)
+app.post("/reset-password", resetPasswordPost);
+
+app.get("/reset-password/:token", (req, res) => {
+  try {
+    jwt.verify(req.params.token, process.env.JWT_SECRET_KEY, (err, email) => {
+      console.log(email)
+      if(err) {
+        res.render("reset-password", {emailSent: true, tokenStatus: false, errorMessage: "Token is invalid or has expired"})
+      }
+      else {
+        res.render("reset-password", {emailSent: true, tokenStatus: true, errorMessage: ""})
+      }
+  })
+  }
+  catch(err) {
+    res.render("reset-password", {emailSent: false, tokenStatus: false, errorMessage: "Internal server error"})
+  }
+})
 
 app.get("/new-booking", authenticateToken, (req, res) => {
   res.send("booking")
