@@ -21,7 +21,7 @@ exports.resetPasswordPost = async (req, res, next) => {
                                 from: 'Arsanya <noreply@arsanya.in>',
                                 to: [`${req.body.email}`],
                                 subject: 'Password reset',
-                                html: `<p>Click <a href="https://hotel.arsanya.in/reset-password/${token}">here</a> to reset your password</p><br><br>https://hotel.arsanya.in/reset-password/${token}`,
+                                html: `<p>Click <a href="https://hotel.arsanya.in/reset-password/${token}">here</a> to reset your password or click on the link given below</p><br><br>https://hotel.arsanya.in/reset-password/${token}`,
                               });
                               await res.status(201).json({
                                   status: "link sent to the given email!",

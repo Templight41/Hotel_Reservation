@@ -12,6 +12,8 @@ const {createAccountPost} = require('./routes/signup.js');
 const {loginPost} = require('./routes/signin.js');
 const {resetPasswordPost} = require('./routes/resetPasswordEmail.js');
 const {authenticateToken} = require('./routes/reAuthenticateToken.js');
+const {resetTokenGet} = require('./routes/resetPasswordTokenGet.js');
+const {resetTokenPost} = require('./routes/resetPasswordTokenPost.js');
 
 app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -58,47 +60,9 @@ app.get("/reset-password", (req, res) => {
 
 app.post("/reset-password", resetPasswordPost);
 
-app.get("/reset-password/:token", (req, res) => {
-  try {
-    jwt.verify(req.params.token, process.env.JWT_SECRET_KEY, (err, email) => {
-      console.log(email)
-      if(err) {
-        res.render("reset-password", {emailSent: true, tokenStatus: false, errorMessage: "Token is invalid or has expired"})
-      }
-      else {
-        res.render("reset-password", {emailSent: true, tokenStatus: true, errorMessage: ""})
-      }
-  })
-  }
-  catch(err) {
-    res.render("reset-password", {emailSent: false, tokenStatus: false, errorMessage: "Internal server error"})
-  }
-})
+app.get("/reset-password/:token", resetTokenGet)
 
-app.post("/reset-password/:token", (req, res) => {
-  try {
-    jwt.verify(req.params.token, process.env.JWT_SECRET_KEY, (err, email) => {
-      if(err) {
-        res.status(200).json({status: "Token is invalid or has expired"});
-      }
-      else {
-        bcrypt.hash(req.body.password, 10, function(err, hash) {
-          connection.query(`UPDATE users SET password = '${hash}' WHERE email = '${email.email}'`, function (err, results, fields) {
-            if(err) {
-              res.status(200).json({status: "Internal server error"});
-            }
-            else {
-              res.status(201).json({status: "Password changed successfully!"});
-            }
-          })
-        });
-      }
-  })
-  }
-  catch(err) {
-    res.status(200).json({status: "Internal server error"});
-  }
-})
+app.post("/reset-password/:token", resetTokenPost)
 
 app.get("/new-booking", authenticateToken, (req, res) => {
   res.send("booking")
