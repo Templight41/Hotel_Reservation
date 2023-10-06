@@ -1,9 +1,9 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql2');
-const {Resend} = require('resend')
+// const {Resend} = require('resend')
 
-const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
+// const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 exports.resetPasswordPost = async (req, res, next) => {
@@ -17,12 +17,12 @@ exports.resetPasswordPost = async (req, res, next) => {
                         //sending email
                         async function resendMail() {
                             try {
-                              const data = await resend.emails.send({
-                                from: 'Arsanya <noreply@arsanya.in>',
-                                to: [`${req.body.email}`],
-                                subject: 'Password reset',
-                                html: `<p>Click <a href="https://hotel.arsanya.in/reset-password/${token}">here</a> to reset your password</p><br><br>https://hotel.arsanya.in/reset-password/${token}`,
-                              });
+                            //   const data = await resend.emails.send({
+                            //     from: 'Arsanya <noreply@arsanya.in>',
+                            //     to: [`${req.body.email}`],
+                            //     subject: 'Password reset',
+                            //     html: `<p>Click <a href="https://hotel.arsanya.in/reset-password/${token}">here</a> to reset your password</p><br><br>https://hotel.arsanya.in/reset-password/${token}`,
+                            //   });
                               await res.status(201).json({
                                   status: "link sent to the given email!",
                               })

@@ -2,9 +2,9 @@ require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql2');
-const {Resend} = require('resend');
+// const {Resend} = require('resend');
 
-const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
+// const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 exports.createAccountPost = async (req, res) => {
@@ -27,12 +27,12 @@ exports.createAccountPost = async (req, res) => {
                 })
                 async function resendEmail() {
                     try {
-                      const data = await resend.emails.send({
-                        from: 'Arsanya <noreply@arsanya.in>',
-                        to: [`${req.body.email}`],
-                        subject: 'Welcome to Sofitel',
-                        html: `<strong>${req.body.name}, </strong><p>Welcome to Sofitel. Your account has been created</p><br><p>Click <a href='https://hotel.arsanya.in/profile'>here</a> To visit your profile.</p>`,
-                      });
+                      // const data = await resend.emails.send({
+                      //   from: 'Arsanya <noreply@arsanya.in>',
+                      //   to: [`${req.body.email}`],
+                      //   subject: 'Welcome to Sofitel',
+                      //   html: `<strong>${req.body.name}, </strong><p>Welcome to Sofitel. Your account has been created</p><br><p>Click <a href='https://hotel.arsanya.in/profile'>here</a> To visit your profile.</p>`,
+                      // });
                       console.log(data);
                     } catch (error) {
                       console.error(error);
