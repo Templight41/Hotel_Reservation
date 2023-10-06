@@ -59,7 +59,7 @@ body {
     text-align: center;
     width: 300px;
     margin: 0 auto;
-    margin-top: 200px;
+    margin-top: 280px;
     color: #8d7535;
     font-family: sans-serif;
 }
@@ -123,6 +123,18 @@ input:focus {
     background-color: rgb(23, 100, 253);
     color: white;
     margin: 15px auto;
+    cursor: pointer;
+}
+
+#signin-button:active {
+    background-color: rgb(77, 130, 236);
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+.signin-button-disabled {
+    cursor: not-allowed !important;
+    background-color: grey !important;
 }
 
 .login-anchor {

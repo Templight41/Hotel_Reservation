@@ -46,7 +46,7 @@ function check() {
     else {
         logSignButton.removeAttribute("disabled", true);
         logSignButton.style.backgroundColor = blueBackgroundValue
-        logSignButton.style.cursor = "not-allowed";
+        logSignButton.style.cursor = "pointer";
     }
 }
 

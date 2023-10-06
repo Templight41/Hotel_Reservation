@@ -30,8 +30,8 @@ exports.createAccountPost = async (req, res) => {
                       const data = await resend.emails.send({
                         from: 'Arsanya <noreply@arsanya.in>',
                         to: [`${req.body.email}`],
-                        subject: 'Account Created!',
-                        html: `<strong>Welcome ${req.body.name}</strong>`,
+                        subject: 'Welcome to Sofitel',
+                        html: `<strong>${req.body.name}, </strong><p>Welcome to Sofitel. Your account has been created</p><br><p>Click <a href='https://hotel.arsanya.in/profile'>here</a> To visit your profile.</p>`,
                       });
                       console.log(data);
                     } catch (error) {
