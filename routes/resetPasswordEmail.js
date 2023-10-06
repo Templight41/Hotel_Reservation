@@ -1,9 +1,9 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql2');
-const {Resend} = require('resend')
+// const {Resend} = require('resend')
 
-const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
+// const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 exports.resetPasswordPost = async (req, res, next) => {
@@ -30,7 +30,7 @@ exports.resetPasswordPost = async (req, res, next) => {
                               res.status(200).json({status: "Internal server error"});
                             }
                         }
-                        resendMail();
+                        // resendMail();
                     }
                     else {
 
