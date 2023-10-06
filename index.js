@@ -33,19 +33,6 @@ app.get('/', (req, res) => {
   res.render("home.ejs")
 })
 
-app.get("/test",authenticateToken, (req, res) => {
-  try {
-    connection.query(`SELECT * FROM users WHERE email = '${req.email.email}'`, async function (err, results, fields) {
-      console.log(results)
-      console.log(req.email)
-    })
-  }
-  catch(err) {
-    console.log(err)
-  }
-  res.json()
-})
-
 app.get("/profile", authenticateToken)
 
 app.get("/create-account", (req, res) => {

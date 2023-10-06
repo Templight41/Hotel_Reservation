@@ -13,7 +13,18 @@ body {
 }
 
 #hotel-logo-anchor {
-    display: none;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    height: 130px;
+    width: 150px;
+    background-color: black;
+}
+
+#hotel-logo-anchor img{
+    height: 90%;
+    display: block;
+    margin: auto auto;
 }
 
 .image-container {
@@ -146,18 +157,6 @@ input:focus {
 }
 
 @media (max-width: 680px) {
-    #hotel-logo-anchor {
-        display: inline-block;
-        position: absolute;
-        height: 120px;
-        width: 120px;
-        background-color: black;
-    }
-    #hotel-logo-anchor img{
-        width: 90%;
-        display: block;
-        margin: auto auto;
-    }
     body {
         flex-direction: column;
         justify-content: flex-start;
