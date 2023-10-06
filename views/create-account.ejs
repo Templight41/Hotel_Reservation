@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="/css/new-old-login.css">
+</head>
+<body>
+    <a id="hotel-logo-anchor" href="/"><img src="/assets/santa_clara_logo02.png" alt=""></a>
+    <div class="image-container">
+        <img src="/assets/Sofitel_Legend_santaclara_homepage_slide01.jpg" alt="">
+    </div>
+    <div class="login-container">
+        <div class="error-message-container-hidden" id="error-message-container">
+            <p id="error-message">
+            </p>
+        </div>
+        <p class="error-message-status"></p>
+        <h3>
+            SOFITEL LEGEND
+            SANTA CLARA CARTAGENA
+        </h3>
+        <p>
+            Welcome
+        </p>
+        <form>
+            <div class="name-container username-container">
+                <label for="name">Full name</label>
+                <div class="input-container">
+                    <input type="text" id="name" name="name" placeholder="name">
+                </div>
+            </div>
+            <div class="username-container">
+                <label for="email">Email</label>
+                <div class="input-container">
+                    <input type="email" id="email" name="email" placeholder="email address">
+                </div>
+            </div>
+            <div class="password-container">
+                <label for="password">Password</label><br>
+                <div class="input-container">
+                    <input type="password" id="password" name="password" placeholder="password">
+                </div>
+            </div>
+            <div class="password-container">
+                <label for="password">Enter password again</label><br>
+                <div class="input-container">
+                    <input type="password" id="re-password" name="re-password" placeholder="re-enter password">
+                </div>
+            </div>
+            <button id="signin-button" class="signin-button">Create Account</button>
+            <a href="/login" class="create-account-anchor login-anchor">login</a>
+        </form>
+        <p id="result"></p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/password-rechecking.js"></script>
+    <script src="/js/sendNewAccountPOST.js"></script>
+</body>
+</html>
