@@ -483,6 +483,10 @@ legend {
     filter: invert(100%);
 }
 
+#profile-button-mobile {
+    display: none;
+}
+
 @media (max-width: 920px) {
     .location-elements {
         flex-direction: column;
@@ -540,13 +544,31 @@ legend {
     .right-nav {
         position: fixed;
         left: 0;
-        bottom: 0;
+        bottom: 4px;
         right: 0;
         width: auto;
+        display: flex;
+        justify-content: center;
+        padding: 0px 10px;
+        gap: 10px;
+    }
+    #profile-button-mobile {
+        flex-grow: 1;
+        width: 50%;
+        height: 55px;
+        background-color: #8d7535;
+        text-align: center;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 12px;
     }
     #room-booking-button-main {
-        width: 100%;
-        border-radius: 0px;
+        width: 50%;
+        flex-grow: 1;
+        border-radius: 12px;
     }
     .booking-button-gap {
         height: 55px;
