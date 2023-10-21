@@ -14,6 +14,7 @@ const {resetPasswordPost} = require('./routes/resetPasswordEmail.js');
 const {authenticateToken} = require('./routes/reAuthenticateToken.js');
 const {resetTokenGet} = require('./routes/resetPasswordTokenGet.js');
 const {resetTokenPost} = require('./routes/resetPasswordTokenPost.js');
+const {verifiedLogin} = require('./routes/verifiedLogin.js')
 
 app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -35,15 +36,17 @@ app.get('/', (req, res) => {
   res.render("home.ejs")
 })
 
-app.get("/profile", authenticateToken)
+app.get("/profile", authenticateToken, (req, res) => {
+  res.render("profile");
+})
 
-app.get("/create-account", (req, res) => {
+app.get("/create-account", verifiedLogin, (req, res) => {
   res.render("create-account")
 })
 
 app.post("/create-account", createAccountPost);
 
-app.get("/login", (req, res) => {
+app.get("/login", verifiedLogin, (req, res) => {
   res.render("login.ejs")
 })
 
