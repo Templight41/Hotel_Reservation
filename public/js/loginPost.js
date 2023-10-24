@@ -1,3 +1,10 @@
+//getting "from" query
+const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+let value = params.from;
+
+
 // removing default action of form
 document.querySelector('form').addEventListener("submit", (e) => {
     e.preventDefault();
@@ -40,7 +47,7 @@ document.querySelector('button').addEventListener("click", (e) => {
       })
       .then((res) => {
         if (res.data.status == "password match") {
-            window.location.href = "/profile"
+            window.location.href = value
         } else {
             document.querySelector('#error-message').innerHTML = res.data.status;
             document.querySelector('#error-message-container').className += " error-message-container-visible";
