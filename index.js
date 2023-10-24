@@ -69,7 +69,6 @@ app.post("/reset-password/:token", resetTokenPost)
 
 app.get("/booking/new", authenticateToken, (req, res) => {
   res.render("booking");
-  console.log(req.url)
 })
 
 app.get("/database-testing", (req, res) => {
