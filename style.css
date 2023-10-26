@@ -22,7 +22,7 @@ a {
 }
 
 .home-anchor {
-    color: #728aca;
+    color: #4468c9;
     font-family: sans-serif;
 }
 
@@ -33,11 +33,22 @@ a {
 .my-account-anchor {
     height: 46px;
     width: 160px;
-    background-color: #728aca;
+    background-color: #4468c9;
     border-radius: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     gap: 12px;
+}
+
+
+/* content styling */
+
+.content {
+    display: flex;
+    flex-direction: row;
+    margin: 40px 1%;
+    height: 1000px;
+    background-color: black;
 }
