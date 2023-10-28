@@ -5,8 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New booking</title>
     <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/booking-content.css">
 </head>
 <body>
     <%- include('header.ejs') %>
+    <div id="content" class="content">
+        <div id="content-left" class="content-left">
+            <h1>Choose your room</h1>
+            <p>Prices for 1 person and 1 night</p>
+            <div id="num-of-room-container" class="num-of-room-container">
+                <p>7 ROOMS FOR YOUR SEARCH</p>
+            </div>
+            <% for (room of rooms) {%>
+                <div class="room-containers">
+                    <img src="https://www.ahstatic.com/photos/1871_rokgb_00_p_346x260.jpg" alt="" class="room-booking-images">
+                    <div class="room-booking-right-container">
+                        <h2>
+                            <%=room.name%>
+                        </h2>
+                        <div class="bed-size">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bed-double"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M12 4v6"/><path d="M2 18h20"/></svg>
+                            <span><%=room.beds%></span>
+                        </div>
+                        <div class="room-info">
+                            <span><%=room.people%> pers. max</span>
+                            <span><%=room.size%> m<sup>2</sup></span>
+                            <% if (room.view != '0') {%>
+                                <span><%=room.view%></span>
+                            <%}%>
+                        </div>
+                        
+                    </div>
+                </div>
+            <%}%>
+        </div>
+
+        <div id="content-right" class="content-right">
+
+        </div>
+    </div>
 </body>
 </html>

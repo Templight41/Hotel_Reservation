@@ -14,7 +14,8 @@ const {resetPasswordPost} = require('./routes/resetPasswordEmail.js');
 const {authenticateToken} = require('./routes/reAuthenticateToken.js');
 const {resetTokenGet} = require('./routes/resetPasswordTokenGet.js');
 const {resetTokenPost} = require('./routes/resetPasswordTokenPost.js');
-const {verifiedLogin} = require('./routes/verifiedLogin.js')
+const {verifiedLogin} = require('./routes/verifiedLogin.js');
+const {bookingNewSelect} = require('./routes/bookingNewSelect.js')
 
 app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -28,7 +29,7 @@ app.use(cookieParser());
 app.listen(8080, console.log("listening on port 8080"));
 
 
-// // Create the connection to the database
+// Create the connection to the database
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 
@@ -67,8 +68,8 @@ app.get("/reset-password/:token", resetTokenGet)
 
 app.post("/reset-password/:token", resetTokenPost)
 
-app.get("/booking/new", authenticateToken, (req, res) => {
-  res.render("booking");
+app.get("/booking/new", authenticateToken, bookingNewSelect, (req, res) => {
+  res.render("booking", {rooms: roomsData});
 })
 
 app.get("/database-testing", (req, res) => {

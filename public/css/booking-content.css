@@ -53,19 +53,17 @@ a {
     margin: 0 auto;
     padding: 30px 16px;
     max-width: 90rem;
-    height: 1000px;
     gap: 30px;
-    /* background-color: black; */
 }
 
 .content-left {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     font-family: sans-serif;
     max-width: 66.6666%;
     flex-grow: 2;
-    /* border: 1px solid black; */
 }
 
 .content-left h1 {
@@ -94,9 +92,14 @@ a {
     display: flex;
     flex-direction: row;
     gap: 12px;
-    border: 1px solid black;
+    border: 1px solid rgb(204, 204, 204);
     padding: 14px 16px;
     border-radius: 6px;
+    margin: 8px 0px;
+    width:inherit;
+    flex-basis: 100%;
+    /* width: 100%;
+    margin: 0px 14px; */
 }
 
 .room-containers > img {
@@ -115,11 +118,13 @@ a {
 
 .room-booking-right-container h2 {
     font-family: 'Roboto', sans-serif;
+    width: 100%;
     line-height: 28px;
     color: rgb(87, 87, 87);
     text-wrap: balance;
     font-size: 20px;
     margin-bottom: 18px;
+    display: block;
 }
 
 .bed-size {
