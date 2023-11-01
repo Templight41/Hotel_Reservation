@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+body {
+    background-color: rgb(244, 244, 245);
+}
+
 a {
     text-decoration: none;
 }
@@ -17,6 +21,7 @@ a {
     padding: 0px 4%;
     justify-content: space-between;
     border-bottom: 2px solid rgba(0,0,0,0.1);
+    background-color: white;
 }
 
 .home-container {
@@ -53,29 +58,31 @@ a {
     margin: 0 auto;
     padding: 30px 16px;
     max-width: 90rem;
-    height: 1000px;
     gap: 30px;
-    /* background-color: black; */
 }
 
 .content-left {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     font-family: sans-serif;
     max-width: 66.6666%;
     flex-grow: 2;
-    /* border: 1px solid black; */
 }
 
 .content-left h1 {
     margin: 10px 0px;
+    width: 100%;
+    text-align: center;
 }
 
 .content-left > p {
     font-size: 12px;
     margin-bottom: 28px;
     color: rgb(110, 110, 110);
+    width: 100%;
+    text-align: center;
 }
 
 .num-of-room-container {
@@ -94,9 +101,13 @@ a {
     display: flex;
     flex-direction: row;
     gap: 12px;
-    border: 1px solid black;
-    padding: 14px 16px;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 18px 22px;
     border-radius: 6px;
+    margin: 8px 0px;
+    width:inherit;
+    flex-basis: 100%;
+    background-color: white;
 }
 
 .room-containers > img {
@@ -115,11 +126,13 @@ a {
 
 .room-booking-right-container h2 {
     font-family: 'Roboto', sans-serif;
+    width: 100%;
     line-height: 28px;
     color: rgb(87, 87, 87);
     text-wrap: balance;
     font-size: 20px;
     margin-bottom: 18px;
+    display: block;
 }
 
 .bed-size {
@@ -127,8 +140,22 @@ a {
     flex-direction: row;
     gap: 8px;
     align-items: center;
+    margin-bottom: 10px;
 }
 
+.room-info span{
+    display: inline-block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    padding: 5px 8px;
+    border-radius: 3px;
+    background-color: #eaedf5;
+    color: #3d4892;;
+}
+
+.room-info span sup {
+    font-size: 8px;
+}
 
 .content-right {
     min-width: 280px;

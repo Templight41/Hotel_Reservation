@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql2');
 
-const connection = mysql.createConnection(process.env.DATABASE_URL);
+const connection = mysql.createPool(process.env.DATABASE_URL);
 
 exports.loginPost = async (req, res) => {
     try {
@@ -25,11 +25,11 @@ exports.loginPost = async (req, res) => {
                     }
 
                 }else {
-                res.status(200).json({status: "User not found, create an Account"});
+                    res.status(200).json({status: "User not found, create an Account"});
                 }
             }
             catch {
-                res.status(200).json({status: "User not found, create an Account"});
+                res.status(200).json({status: "Internal server error"});
         }
     })
     }

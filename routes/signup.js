@@ -39,10 +39,10 @@ exports.createAccountPost = async (req, res) => {
                     }
                   }
                   resendEmail();
-            }
-            })
-    }
-    catch(err) {
-        console.log(err)
-    }
-    }
+              }
+          })
+      }
+  catch(err) {
+      console.log(err)
+  }
+}
