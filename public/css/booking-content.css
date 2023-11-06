@@ -159,6 +159,10 @@ a {
 
 .content-right {
     min-width: 280px;
-    background-color: black;
     flex-grow: 1;
+}
+
+.room-pricing-container {
+    width: 100%;
+    
 }
