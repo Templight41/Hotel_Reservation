@@ -108,6 +108,7 @@ a {
     width:inherit;
     flex-basis: 100%;
     background-color: white;
+    box-shadow: 1px 1px 4px 1px rgb(204, 204, 204);
 }
 
 .room-containers > img {
@@ -155,6 +156,13 @@ a {
 
 .room-info span sup {
     font-size: 8px;
+}
+
+.room-rate-container {
+    background-color: rgb(244, 244, 245);
+    padding: 16px 12px;
+    text-align: end;
+    border-radius: 10px;
 }
 
 .content-right {
