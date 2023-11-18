@@ -11,7 +11,7 @@ require('dotenv').config();
 const {createAccountPost} = require('./routes/signup.js');
 const {loginPost} = require('./routes/signin.js');
 const {resetPasswordPost} = require('./routes/resetPasswordEmail.js');
-const {authenticateToken} = require('./routes/reAuthenticateToken.js');
+const {authenticateToken} = require('./routes/authenticateToken.js');
 const {resetTokenGet} = require('./routes/resetPasswordTokenGet.js');
 const {resetTokenPost} = require('./routes/resetPasswordTokenPost.js');
 const {verifiedLogin} = require('./routes/verifiedLogin.js');
@@ -56,6 +56,14 @@ app.post("/login", loginPost)
 app.get("/logout", (req, res) => {
   res.clearCookie("token")
   res.redirect("/")
+})
+
+app.get("/refresh", verifiedLogin, (req, res) => {
+  if(!req.cookies.token) console.log(req.locals)
+  else {
+    console.log(req.locals)
+  }
+  res.send("yes")
 })
 
 app.get("/reset-password", (req, res) => {
