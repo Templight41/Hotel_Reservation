@@ -11,7 +11,7 @@ exports.loginPost = async (req, res) => {
             try {
                 if(results[0].email == `${req.body.email}` && req.body.type == "login") {
                     if(await bcrypt.compare(req.body.password, results[0].password)) {
-                        const token = jwt.sign({email: req.body.email, type: req.body.type}, process.env.JWT_SECRET_KEY, { expiresIn: '10s' });
+                        const token = jwt.sign({email: req.body.email, type: req.body.type}, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
                         res.cookie("token", token, {
                          httpOnly: true,
                         })
