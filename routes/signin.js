@@ -16,8 +16,8 @@ exports.loginPost = async (req, res) => {
                          httpOnly: true,
                         })
                         res.status(201).json({
-                        status: "password match",
-                        token: token,
+                            status: "password match",
+                            token: token,
                         })
                     }
                     else {
