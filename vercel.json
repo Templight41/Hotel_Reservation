@@ -11,5 +11,11 @@
             "src": "/(.*)",
             "dest": "/"
         }
+    ],
+    "crons": [
+        {
+            "path": "/database-testing",
+            "schedule": "30 2 * * *"
+        }
     ]
 }
