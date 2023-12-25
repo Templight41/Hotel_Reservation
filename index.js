@@ -30,7 +30,7 @@ app.listen(8080, console.log("listening on port 8080"));
 
 
 // Create the connection to the database
-const connection = mysql.createConnection(process.env.DATABASE_URL);
+// const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 
 app.get('/', (req, res) => {

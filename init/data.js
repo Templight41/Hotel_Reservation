@@ -7,7 +7,7 @@ exports.rooms = [
         3,
         34,
         "Courtyard View or Pool side or Garden View",
-        10
+        10.00
     ],
     [
         "room2",
@@ -17,7 +17,7 @@ exports.rooms = [
         3,
         34,
         "Pool side or Garden View",
-        12
+        12.00
     ],
     [
         "room3",
@@ -27,7 +27,7 @@ exports.rooms = [
         3,
         43,
         "Historic side view or Garden View",
-        14
+        14.00
     ],
     [
         "room4",
@@ -37,7 +37,7 @@ exports.rooms = [
         3,
         34,
         "Sea side or Ocean/Sea view",
-        16
+        16.00
     ],
     [
         "room5",
@@ -47,7 +47,7 @@ exports.rooms = [
         3,
         70,
         "Historic side view or Garden View or Courtyard View",
-        18
+        18.00
     ],
     [
         "room6",
@@ -57,7 +57,7 @@ exports.rooms = [
         3,
         73,
         false,
-        20
+        20.00
     ],
     [
         "room7",
@@ -67,6 +67,6 @@ exports.rooms = [
         3,
         147,
         "Ocean/Sea view or City View",
-        22
+        22.00
     ],
 ];

@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: rgb(244, 244, 245);
+    background-color: rgb(250, 250, 250);
 }
 
 a {
@@ -52,11 +52,143 @@ a {
 
 /* body content styling */
 
+.date-select-overlay-container {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.2);
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.date-select-container {
+    height: 400px;
+    width: 700px;
+    background-color: rgb(250, 250, 250);
+    border-radius: 12px;
+    border: 1px solid black;
+    box-shadow: 3px 3px 40px grey;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    gap: 52px;
+}
+
+.date-select-container h1 {
+    font-family: 'Roboto', sans-serif;
+}
+
+.date-select-input-container {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    justify-content: center;
+    align-items: end;
+}
+
+.date-select-input-container svg {
+    transform: translateY(-6px);
+}
+
+.date-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.date-selector-error {
+    color: red;
+    opacity: 0;
+}
+
+.visible {
+    transition: 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.overlay-visible {
+    display: flex;
+}
+
+.date-select-button {
+    padding: 8px 20px;
+    font-size: 14px;
+    border: transparent;
+    border-radius: 14px;
+    background-color:#1E1852;
+    color: white;
+    cursor: pointer;
+}
+
+.date-select-button:hover {
+    background-color: #2d247c;
+}
+
+.booking-config-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px 36px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    background-color: rgb(250, 250, 250);
+}
+
+.booking-config-container div {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    color: rgba(31, 31, 31, 0.61);
+}
+
+.config-left-container button{
+    padding: 6px 16px;
+    font-size: 15px;
+    height: 34px;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width:250px;
+}
+
+#num-of-adults-button {
+    width: auto;
+}
+
+input {
+    padding: 0px 12px;
+    font-size: 15px;
+    height: 34px;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    /* display: none; */
+}
+
+.config-left-container button:hover {
+    background-color: #ececec;
+}
+
 .content {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    padding: 30px 16px;
+    padding: 30px 2%;
     max-width: 90rem;
     gap: 30px;
 }
@@ -88,13 +220,14 @@ a {
 .num-of-room-container {
     display: block;
     width: 100%;
+    margin-left: 8px;
 }
 
 .num-of-room-container > p {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 14px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 }
 
 .room-containers {
@@ -106,6 +239,7 @@ a {
     border-radius: 6px;
     margin: 8px 0px;
     width:inherit;
+    max-width: 850px;
     flex-basis: 100%;
     background-color: white;
     box-shadow: 1px 1px 4px 1px rgb(204, 204, 204);
@@ -160,17 +294,56 @@ a {
 
 .room-rate-container {
     background-color: rgb(244, 244, 245);
-    padding: 16px 12px;
+    padding: 12px 18px;
     text-align: end;
-    border-radius: 10px;
+    border-radius: 6px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.room-rate-container > p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+.room-rate-container > p > .rate {
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.room-booking-right-container .room-select-container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 16px;
+}
+
+.room-select-container button{
+    padding: 14px 36px;
+    border-radius: 36px;
+    border: transparent;
+    background-color: #1E1852;
+    color: aliceblue;
+    font-family: sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.room-select-container button:hover {
+    background-color: #2d247c;
 }
 
 .content-right {
     min-width: 280px;
     flex-grow: 1;
+    border: 1px solid black;
 }
 
 .room-pricing-container {
     width: 100%;
-    
+    max-height: 500px;
+    background-color: beige;
+    height: 100px;
 }
