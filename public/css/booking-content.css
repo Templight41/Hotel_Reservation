@@ -161,11 +161,46 @@ a {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    width:250px;
+    /* width:250px; */
+}
+
+#date-start-select-display {
+    margin-left: 6px;
 }
 
 #num-of-adults-button {
     width: auto;
+}
+
+.members-select-container {
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 4px;
+    display: none !important;
+}
+
+.members-select-container-visible {
+    display: block !important;
+}
+
+.members-select-container > input {
+    border: none;
+    width: 28px;
+    height: 24px;
+    padding: 1px 10px;
+}
+
+.members-select-container:before {
+    content:"";
+    position: absolute;
+    height: 0px;
+    width: 0px;
+    top: 3px;
+    left: -20px; /* 1px buffer for zooming problems while rendering*/
+    border-width: 10px;
+    border-color: transparent black transparent transparent;
+    border-style: solid;
 }
 
 input {
@@ -175,9 +210,8 @@ input {
     background-color: transparent;
     border: 1px solid black;
     border-radius: 4px;
-    cursor: pointer;
+    cursor:text;
     font-family: 'Roboto', sans-serif;
-    /* display: none; */
 }
 
 .config-left-container button:hover {

@@ -4,66 +4,7 @@ let members = urlParams.get("members");
 let date = urlParams.get("date");
 
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-// let todayDate = `${new Date().getDate().toString()} ${months[new Date().getMonth().toString()]} ${new Date().getFullYear().toString()}`;
-// let nextDate = `${new Date().getDate()} ${months[new Date().getMonth().toString()]} ${new Date().getFullYear().toString()}`;
 
-// function nextDayFunc() {
-//     if(new Date().getMonth() <= 7) {
-//         console.log("first half year")
-//         if(new Date().getMonth() == 1) {
-//             //leap year
-//             if(new Date().getFullYear() % 4 == 0) {
-//                 if(new Date().getDate() == 29) {
-//                     nextDate = `${1} ${months[new Date().getMonth() + 1]} ${new Date().getFullYear().toString()}`;
-//                 } else {
-//                     nextDate = `${new Date().getDate() + 1} ${months[new Date().getMonth()]} ${new Date().getFullYear().toString()}`;
-//                 }
-//             } else {
-//                 if(new Date().getDate() == 28) {
-//                     nextDate = `${1} ${months[new Date().getMonth() + 1]} ${new Date().getFullYear().toString()}`;
-//                 } else {
-//                     nextDate = `${new Date().getDate() + 1} ${months[new Date().getMonth()]} ${new Date().getFullYear().toString()}`;
-//                 }
-//             }
-//         } else if(new Date().getMonth() % 2 == 0) {
-//             if(new Date().getDate() == 31) {
-//                 nextDate = `${1} ${months[new Date().getMonth() + 1]} ${new Date().getFullYear().toString()}`;
-//             } else {
-//                 nextDate = `${new Date().getDate() + 1} ${months[new Date().getMonth()]} ${new Date().getFullYear().toString()}`;
-//             }
-//         } else {
-//             if(new Date().getDate() == 30) {
-//                 nextDate = `${1} ${months[new Date().getMonth() + 1]} ${new Date().getFullYear().toString()}`;
-//             } else {
-//                 nextDate = `${new Date().getDate() + 1} ${months[new Date().getMonth()]} ${new Date().getFullYear().toString()}`;
-//             }
-//         }
-//     } else {
-//         console.log("second half year")
-//         if(new Date().getMonth() % 2 == 0) {
-//             if(new Date().getDate() == 30) {
-//                 nextDate = `${1} ${months[new Date().getMonth() + 1]} ${new Date().getFullYear().toString()}`;
-//             } else {
-//                 nextDate = `${new Date().getDate() + 1} ${months[new Date().getMonth()]} ${new Date().getFullYear().toString()}`;
-//             }
-//         } else {
-//             if(new Date().getDate() == 31) {
-//                 nextDate = `${1} ${months[new Date().getMonth() + 1]} ${new Date().getFullYear().toString()}`;
-//             } else {
-//                 nextDate = `${new Date().getDate() + 1} ${months[new Date().getMonth()]} ${new Date().getFullYear().toString()}`;
-//             }
-//         }
-//     }
-// }
-
-//setting date value in config part
-let todayDateArr = urlParams.get("start").split("-");
-let nextDateArr = urlParams.get("end").split("-")
-
-let todayDate = todayDateArr[2] + " " + months[todayDateArr[1] - 1] + " " + todayDateArr[0];
-let nextDate = nextDateArr[2] + " " + months[nextDateArr[1] - 1] + " " + nextDateArr[0];
-
-document.querySelector("#date-start-select-display").innerHTML = todayDate + " - " + nextDate;
 
 document.querySelector("#dateIn").value = urlParams.get("start");
 document.querySelector("#dateOut").value = urlParams.get("end");
@@ -72,8 +13,6 @@ document.querySelector("#dateOut").value = urlParams.get("end");
 if(members>0) {
     document.querySelector("#num-of-adults").innerHTML = members;    
 }
-
-// document.querySelector("#date-start-select-display").innerHTML = todayDate + " - " + nextDate;
 
 
 let startDate = new Date().toISOString().split('T')[0];
@@ -122,10 +61,34 @@ function dateSelect() {
 function dateButton() {
     document.querySelector(".date-select-overlay-container").className += " overlay-visible";
 }
+document.querySelector("body").addEventListener("click", (e) => {
+    if (startDate != undefined || startDate != null || endDate != undefined || endDate != null) {
+        if(e.target.className == "date-select-overlay-container overlay-visible") document.querySelector(".date-select-overlay-container").className = "date-select-overlay-container";
+    }
+})
+
+
+
+function membersButton() {
+    if(document.querySelector("#members-select-container").attributes.visible.value == "0") {
+        document.querySelector("#members-select-container").className += " members-select-container-visible";
+        document.querySelector("#members-select-container").setAttribute("visible", 1)
+    } else {
+        document.querySelector("#members-select-container").className = "members-select-container";    
+        document.querySelector("#members-select-container").setAttribute("visible", 0)       
+    }
+}
+document.querySelector("#members-select-container input").addEventListener("keydown", (e) => {
+    if(e.key == "Enter") {
+        urlParams.set("members",e.target.value)
+        window.location.search = urlParams
+    }
+})
+
 
 
 startDate = urlParams.get("start");
-endDate = urlParams.get("end")
+endDate = urlParams.get("end");
 
 
 
@@ -133,18 +96,17 @@ if(startDate == undefined || startDate == null || endDate == undefined || endDat
     
     //date select feature
     dateButton()
-    // urlParams.append("start",new Date().toISOString().split('T')[0])
-    // window.location.search = urlParams
 
 } else if(!members || members<=0) {
 
     //number of people select feature
-    urlParams.append("members",1)
+    urlParams.set("members",1)
     window.location.search = urlParams
 
 } else {
 
     //whole page logic
-
+    document.querySelector("#date-start-select-display").innerText = `${startDate} - ${endDate}`
+    document.querySelector(".members-select-container input").setAttribute("value", members);
 
 }
