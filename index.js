@@ -7,6 +7,18 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+const Razorpay = require('razorpay');
+let instance = new Razorpay({ key_id: process.env.RAZORPAY_ID, key_secret: process.env.RAZORPAY_KEY })
+
+// let options = {
+//   amount: 50000,  // amount in the smallest currency unit
+//   currency: "INR",
+//   receipt: "order_rcptid_11"
+// };
+// instance.orders.create(options, function(err, order) {
+//   console.log(order);
+// });
+
 
 const {createAccountPost} = require('./routes/signup.js');
 const {loginPost} = require('./routes/signin.js');
@@ -16,6 +28,8 @@ const {resetTokenGet} = require('./routes/resetPasswordTokenGet.js');
 const {resetTokenPost} = require('./routes/resetPasswordTokenPost.js');
 const {verifiedLogin} = require('./routes/verifiedLogin.js');
 const {bookingNewSelect} = require('./routes/bookingNewSelect.js')
+const {selectedRoomDetails} = require('./routes/selectedRoomDetails.js');
+const {paymentSuccess} = require("./routes/paymentSuccess.js")
 
 app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -80,12 +94,47 @@ app.get("/booking/new", authenticateToken, bookingNewSelect, (req, res) => {
   res.render("booking", {rooms: roomsData});
 })
 
+app.post("/booking/room", bookingNewSelect, (req, res) => {
+  res.json({room : roomsData})
+})
+
+app.get("/booking/test", (req, res) => {
+  res.render("bookingtest.ejs")
+})
+
+app.post("/booking/pay/:roomId/:members/:nights", selectedRoomDetails, (req, res) => {
+  let options = {
+    amount: `${roomData[0].price*parseInt(req.params.members)*parseInt(req.params.nights)}00`,  // amount in the smallest currency unit
+    currency: "INR",
+    receipt: `order_rcptid_${roomData[0].id}`
+  };
+  instance.orders.create(options, function(err, order) {
+    res.json({
+      orderId: order.id,
+      amount: order.amount
+    })
+  });
+
+})
+
+app.post("/booking/success", paymentSuccess)
+
+app.get("/booking/success", paymentSuccess)
+
+app.get("/booking/:any", (req, res) => {
+  res.redirect("/booking/new")
+})
+
 app.get("/database-testing", (req, res) => {
   connection.query(`SELECT * FROM users`, function (err, results, fields) {
     nameAns = results[0].name
     res.send(nameAns)
   })
   connection.end()
+})
+
+app.get("/:any", (req, res) => {
+  res.redirect("/")
 })
 
 
@@ -110,3 +159,5 @@ app.get("/database-testing", (req, res) => {
 // // })
 
 // connection.end()
+
+

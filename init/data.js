@@ -69,4 +69,14 @@ exports.rooms = [
         "Ocean/Sea view or City View",
         22.00
     ],
+    [
+        "room8",
+        "DUPLEX SUITE, 1 King Size Bed, In the Colonial Zone, Butler Service",
+        "/assets/room8.jpg",
+        "1 King size bed(s)",
+        3,
+        70,
+        "Historic side view or Garden View or Courtyard View",
+        24.00
+    ]
 ];

@@ -22,7 +22,7 @@
                     <input type="date" id="dateOut" onchange="dateChange()">
                 </div>
             </div>
-            <p class="date-selector-error"></p>
+            <p class="date-selector-error" style="color: red; opacity: 0;"></p>
             <button onclick="dateSelect()" id="date-select-button" class="date-select-button">Select</button>
         </div>
     </div>
@@ -52,7 +52,7 @@
                 <p>7 ROOMS FOR YOUR SEARCH</p>
             </div>
             <% for (room of rooms) {%>
-                <div class="room-containers">
+                <div class="room-containers" id="<%=room.id%>">
                     <img src="<%=room.img%>" alt="" class="room-booking-images">
                     <div class="room-booking-right-container">
                         <h2>
@@ -74,7 +74,7 @@
                             <p>1 adult | 1 night</p>
                         </div>
                         <div class="room-select-container">
-                            <button room="<%=room.id%>">Select room</button>
+                            <button room="<%=room.id%>" onclick="roomSelectButton(this)" id=<%=`${room.id}id`%> class="selectButtons">Select room</button>
                         </div>
                     </div>
                 </div>
@@ -83,10 +83,42 @@
 
         <div id="content-right" class="content-right">
             <div id="room-pricing-container" class="room-pricing-container">
-                
+                <p>SOFITEL LEGEND SANTA CLARA CARTAGENA</p>
+                <div class="check-in-out-container room-pricing-container-elements">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/></svg>
+                    <span>Check-in 3:00 PM &nbsp; | &nbsp; Check-out 12:00 PM</span>
+                </div>
+                <hr>
+                <div class="check-in-out-container room-pricing-container-elements">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check-2"><path d="M8 2v4"/><path d="M16 2v4"/><path d="M21 14V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"/><path d="M3 10h18"/><path d="m16 20 2 2 4-4"/></svg>
+                    <span id="check-in-out-date"></span>
+                </div>
+                <p id="no-of-nights"></p>
+                <hr id="second-hr">
+                <div class="number-of-adults room-pricing-container-elements">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span id="number-of-adults"></span>
+                </div>
+                <div class="room-final-pricing-container">
+                    <hr>
+                    <div class="room-price-final-container">
+                        <p><span>ROOM</span><span id="room-price"></span></p>
+                        <hr>
+                        <p><span>TAXES</span><span id="room-tax"></span></p>
+                    </div>
+                    <hr>
+                    <div class="total-price-container">
+                        <p><b>TOTAL</b> (fees and taxes included)</p>
+                        <span id="final-price"></span>
+                    </div>
+                </div>
+                <button class="continue-button" id="continue-button" allowed="false">Confirm</button>
             </div>
         </div>
     </div>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/js/bookingSelect.js"></script>
 </body>
 </html>
