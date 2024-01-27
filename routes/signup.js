@@ -17,7 +17,7 @@ exports.createAccountPost = async (req, res) => {
             if(err != null) {
                 res.status(200).json({status: "Account already exists"})
             } else {
-                const token = jwt.sign({email: req.body.email, type: req.body.type}, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+                const token = jwt.sign({name:req.body.name, email: req.body.email, type: req.body.type}, process.env.JWT_SECRET_KEY, { expiresIn: '2h' });
                     res.cookie("token", token, {
                     httpOnly: true,
                 })
@@ -39,10 +39,10 @@ exports.createAccountPost = async (req, res) => {
                     }
                   }
                   resendEmail();
-            }
-            })
-    }
-    catch(err) {
-        console.log(err)
-    }
-    }
+              }
+          })
+      }
+  catch(err) {
+      console.log(err)
+  }
+}

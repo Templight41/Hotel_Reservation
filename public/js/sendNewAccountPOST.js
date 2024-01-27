@@ -18,7 +18,7 @@ document.querySelector('button').addEventListener("click", (e) => {
       })
       .then((res) => {
         if (res.data.status == "success") {
-            window.location.href = "/booking"
+            window.location.href = "/booking/new"
         } else if(res.data.status == "Account already exists") {
             document.querySelector('#error-message').innerHTML = res.data.status;
             document.querySelector('#error-message-container').className += " error-message-container-visible";

@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    height: 84px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 4%;
+    justify-content: space-between;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.home-container {
+    width: 160px;
+}
+
+.home-anchor {
+    color: #4468c9;
+    font-family: sans-serif;
+}
+
+.hotel-name-header {
+    color: #8d7535;
+}
+
+.my-account-anchor {
+    height: 46px;
+    width: 160px;
+    background-color: #4468c9;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 12px;
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New booking</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/booking-content.css">
+</head>
+<body>
+    <div class="date-select-overlay-container">
+        <div class="date-select-container">
+            <h1>Select start and end date</h1>
+            <div class="date-select-input-container">
+                <div class="date-input-container">
+                    <span>Check-<b>IN</b> date</span>
+                    <input type="date" id="dateIn" onchange="dateChange()">
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>
+                <div class="date-input-container">
+                    <span>Check-<b>OUT</b> date</span>
+                    <input type="date" id="dateOut" onchange="dateChange()">
+                </div>
+            </div>
+            <p class="date-selector-error" style="color: red; opacity: 0;"></p>
+            <button onclick="dateSelect()" id="date-select-button" class="date-select-button">Select</button>
+        </div>
+    </div>
+    <%- include('header.ejs') %>
+    <div class="booking-config-container">
+        <div class="config-left-container">
+            <span>YOUR SEARCH</span>
+            <button onclick="dateButton()">
+                <svg style="transform: translateY(2px);" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                <span id="date-start-select-display"></span>
+            </button>
+            <button id="num-of-adults-button" onclick="membersButton()">
+                <svg style="transform: translateY(2px);" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span id="num-of-adults"></span> adult(s)
+            </button>
+            <div class="members-select-container" id="members-select-container" visible="0">
+                <input type="number" min="1" max="3" value="1">
+            </div>
+        </div>
+        <!-- <div class="config-right-container"></div> -->
+    </div>
+    <div id="content" class="content">
+        <div id="content-left" class="content-left">
+            <h1>Choose your room</h1>
+            <p>Prices for 1 person and 1 night</p>
+            <div id="num-of-room-container" class="num-of-room-container">
+                <p>7 ROOMS FOR YOUR SEARCH</p>
+            </div>
+            <% for (room of rooms) {%>
+                <div class="room-containers" id="<%=room.id%>">
+                    <img src="<%=room.img%>" alt="" class="room-booking-images">
+                    <div class="room-booking-right-container">
+                        <h2>
+                            <%=room.name%>
+                        </h2>
+                        <div class="bed-size">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bed-double"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M12 4v6"/><path d="M2 18h20"/></svg>
+                            <span><%=room.beds%></span>
+                        </div>
+                        <div class="room-info">
+                            <span><%=room.people%> pers. max</span>
+                            <span><%=room.size%> m<sup>2</sup></span>
+                            <% if (room.view != '0') {%>
+                                <span><%=room.view%></span>
+                            <%}%>
+                        </div>
+                        <div class="room-rate-container">
+                            <p>Rate - &nbsp;&#x20b9; <span class="rate"><%=room.price%></span></p>
+                            <p>1 adult | 1 night</p>
+                        </div>
+                        <div class="room-select-container">
+                            <button room="<%=room.id%>" onclick="roomSelectButton(this)" id=<%=`${room.id}id`%> class="selectButtons">Select room</button>
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+        </div>
+
+        <div id="content-right" class="content-right">
+            <div id="room-pricing-container" class="room-pricing-container">
+                <p>SOFITEL LEGEND SANTA CLARA CARTAGENA</p>
+                <div class="check-in-out-container room-pricing-container-elements">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/></svg>
+                    <span>Check-in 3:00 PM &nbsp; | &nbsp; Check-out 12:00 PM</span>
+                </div>
+                <hr>
+                <div class="check-in-out-container room-pricing-container-elements">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check-2"><path d="M8 2v4"/><path d="M16 2v4"/><path d="M21 14V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"/><path d="M3 10h18"/><path d="m16 20 2 2 4-4"/></svg>
+                    <span id="check-in-out-date"></span>
+                </div>
+                <p id="no-of-nights"></p>
+                <hr id="second-hr">
+                <div class="number-of-adults room-pricing-container-elements">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span id="number-of-adults"></span>
+                </div>
+                <div class="room-final-pricing-container">
+                    <hr>
+                    <div class="room-price-final-container">
+                        <p><span>ROOM</span><span id="room-price"></span></p>
+                        <hr>
+                        <p><span>TAXES</span><span id="room-tax"></span></p>
+                    </div>
+                    <hr>
+                    <div class="total-price-container">
+                        <p><b>TOTAL</b> (fees and taxes included)</p>
+                        <span id="final-price"></span>
+                    </div>
+                </div>
+                <button class="continue-button" id="continue-button" allowed="false">Confirm</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/bookingSelect.js"></script>
+</body>
+</html>
