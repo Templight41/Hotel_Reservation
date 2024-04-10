@@ -4,9 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
-    Under Construction
+    <%- include('header.ejs') %>
+    
+    <div class="profile-container">
+        <div class="profile-left-container profile-card">
+            <!-- <div class="profile-image-container">
+                <img src="<//%=user.img%>" alt="" class="profile-image">
+            </div> -->
+            <div class="profile-info-container">
+                <h2><%=user.name%></h2>
+                <p><%=user.email%></p>
+                <a href="/logout">Log out</a>
+            </div>
+        </div>
+        <div class="profile-right-container">
+            <h1>Bookings</h1>
+            <div class="booking-container">
+                <!-- <div class="booking-left-container">
+                    <img src="<%=//booking.room.img%>" alt="" class="booking-image">
+                </div> -->
+                <%user.bookings.map(booking => {%>
+                    <div class="booking-right-container" id="<%=booking.roomid%>">
+                        <div class="booking-inner-left">
+                            <img src="./assets/loader.gif" height="150" width="200" >
+                            <div class="room-info">
+                                <h4 class="room-name"></h4>
+                                <p class="amount-paid">Amount paid - &#x20b9; <%=booking.amount%></p>
+                                <p>Check in - <%=booking.checkin%><br>Check out - <%=booking.checkout%></p>
+                            </div>
+
+                        </div>
+                        <button onclick=deleteBooking("<%=booking.orderid%>") orderid="<%=booking.orderid%>">Cancel/Delete</button>
+                    </div>
+                <%})%>
+            </div>
+        </div>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/dotStream.js"></script>
+    <script src="/js/profile.js"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
 node_modules
 .env
 server-831e2829d17cb0e2.js
+.vercel

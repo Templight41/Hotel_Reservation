@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
@@ -30,6 +30,8 @@ const {verifiedLogin} = require('./routes/verifiedLogin.js');
 const {bookingNewSelect} = require('./routes/bookingNewSelect.js')
 const {selectedRoomDetails} = require('./routes/selectedRoomDetails.js');
 const {paymentSuccess} = require("./routes/paymentSuccess.js")
+const {profileData} = require("./routes/profileData.js");
+const { deleteBooking } = require('./routes/deleteBooking.js');
 
 app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -44,15 +46,16 @@ app.listen(8080, console.log("listening on port 8080"));
 
 
 // Create the connection to the database
-const connection = mysql.createConnection(process.env.DATABASE_URL);
+const supabase = require('@supabase/supabase-js').createClient(process.env.SUPABASE_DB_URL, process.env.SUPABASE_KEY);
 
 
 app.get('/', (req, res) => {
   res.render("home.ejs")
 })
 
-app.get("/profile", authenticateToken, (req, res) => {
-  res.render("profile");
+app.get("/profile", authenticateToken, profileData, (req, res) => {
+  // console.log(req.email)
+  res.render("profile", {user: req.locals});
 })
 
 app.get("/create-account", verifiedLogin, (req, res) => {
@@ -91,22 +94,24 @@ app.get("/reset-password/:token", resetTokenGet)
 app.post("/reset-password/:token", resetTokenPost)
 
 app.get("/booking/new", authenticateToken, bookingNewSelect, (req, res) => {
-  res.render("booking", {rooms: roomsData});
+  res.render("booking", {rooms: req.locals});
 })
 
+app.delete("/booking/:orderid", authenticateToken, deleteBooking)
+
 app.post("/booking/room", bookingNewSelect, (req, res) => {
-  res.json({room : roomsData})
+  res.json({room : req.locals})
 })
 
 app.get("/booking/test", (req, res) => {
   res.render("bookingtest.ejs")
 })
 
-app.post("/booking/pay/:roomId/:members/:nights", selectedRoomDetails, (req, res) => {
+app.post("/booking/pay/:roomid/:members/:nights", selectedRoomDetails, (req, res) => {
   let options = {
-    amount: `${roomData[0].price*parseInt(req.params.members)*parseInt(req.params.nights)}00`,  // amount in the smallest currency unit
+    amount: `${req.locals[0].price*parseInt(req.params.members)*parseInt(req.params.nights)}00`,  // amount in the smallest currency unit
     currency: "INR",
-    receipt: `order_rcptid_${roomData[0].id}`
+    receipt: `order_rcptid_${req.locals[0].id}`
   };
   instance.orders.create(options, function(err, order) {
     res.json({
@@ -119,18 +124,18 @@ app.post("/booking/pay/:roomId/:members/:nights", selectedRoomDetails, (req, res
 
 app.post("/booking/success", paymentSuccess)
 
-app.get("/booking/success", paymentSuccess)
+// app.get("/booking/success", paymentSuccess)
 
 app.get("/booking/:any", (req, res) => {
   res.redirect("/booking/new")
 })
 
 app.get("/database-testing", (req, res) => {
-  connection.query(`SELECT * FROM users`, function (err, results, fields) {
-    nameAns = results[0].name
-    res.send(nameAns)
-  })
-  connection.end()
+  const { data, error } = supabase
+    .from('users')
+    .select()
+  
+  console.log(data[0].email)
 })
 
 app.get("/:any", (req, res) => {

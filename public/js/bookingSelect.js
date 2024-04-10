@@ -29,7 +29,7 @@ function dateChange() {
         document.querySelector(".date-selector-error").innerHTML = "Check-out date must be greater than Check-in date"
         document.querySelector(".date-selector-error").className += " visible";
     } else {
-        document.querySelector(".date-selector-error").className += "date-selector-error";
+        document.querySelector(".date-selector-error").className = "date-selector-error";
     }
 
     startDate = document.querySelector("#dateIn").value;
@@ -71,7 +71,7 @@ function dateCheck() {
         document.querySelector(".date-selector-error").innerHTML = "Check-out date must be greater than Check-in date"
         document.querySelector(".date-selector-error").className += " visible";
     } else {
-        document.querySelector(".date-selector-error").className += "date-selector-error";
+        document.querySelector(".date-selector-error").className = "date-selector-error";
     }
 }
 
@@ -185,7 +185,7 @@ endDate = urlParams.get("end");
 
 noOfNights()
 
-if(startDate == undefined || startDate == null || endDate == undefined || endDate == null || numberOfNights <= 0) {
+if(startDate == undefined || startDate=="" || startDate == null || endDate == undefined || endDate=="" || endDate == null || numberOfNights <= 0) {
     
     //date select feature
     dateButton()
@@ -210,6 +210,7 @@ if(startDate == undefined || startDate == null || endDate == undefined || endDat
     axios.post(`/booking/room`)
     .then((res) => {
         roomList = res.data.room;
+        console.log(roomList)
     })
 
     document.querySelector("#check-in-out-date").innerHTML = `${startDate} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg> ${endDate}`

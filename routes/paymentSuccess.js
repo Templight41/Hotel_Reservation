@@ -1,22 +1,34 @@
 const jwt = require('jsonwebtoken')
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
 
-const connection = mysql.createConnection(process.env.DATABASE_URL);
+// const connection = mysql.createConnection(process.env.DATABASE_URL);
+const supabase = require('@supabase/supabase-js').createClient(process.env.SUPABASE_DB_URL, process.env.SUPABASE_KEY);
+
 
 exports.paymentSuccess = (req, res) => {
     
     console.log(req.query)
     console.log(req.body)
-    jwt.verify(req.cookies.token, process.env.JWT_SECRET_KEY, (err, response) => {
+    jwt.verify(req.cookies.token, process.env.JWT_SECRET_KEY, async (err, response) => {
         if(err) return req.locals = err
-        console.log(response)
 
-        const p = [[req.body.razorpay_payment_id, req.body.razorpay_order_id, req.body.razorpay_signature, response.email, req.query.roomId, req.query.bookedOn, req.query.checkIn, req.query.checkOut, req.query.nights, req.query.amount]]
+        req.query.amount = req.query.amount.toString().slice(0,-2) + "." + req.query.amount.toString().slice(-2,3);
+        console.log(req.query.amount)
 
-        connection.query(`INSERT INTO bookings (paymentId, orderId, signature, email, roomId, bookedOn, checkIn, checkOut, nights, amount) VALUES ?`, [p], function (err, results, fields) {
-            console.log(results)
-            console.log(err)
-            res.redirect("/profile")
-        })
+        const p = [{ paymentid: req.body.razorpay_payment_id, orderid: req.body.razorpay_order_id, signature: req.body.razorpay_signature, email: response.email, roomid: req.query.roomId, bookedon: req.query.bookedOn, checkin: req.query.checkIn, checkout: req.query.checkOut, nights: req.query.nights, amount: parseFloat(req.query.amount)}]
+
+        await supabase
+            .from('bookings')
+            .insert(p)
+            .then((result) => {
+                console.log(result)
+                console.log("Inserted")
+                res.redirect("/profile")
+            })
+            .catch((err) => {
+                console.log(err)
+                res.status(500).json({status: "Internal server error"});
+            })
+
     })
 }
