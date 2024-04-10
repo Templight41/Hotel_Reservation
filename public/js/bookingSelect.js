@@ -178,6 +178,12 @@ document.getElementById("continue-button").addEventListener("click", (e) => {
     }
 })
 
+function memberChange() {
+    urlParams.set("members", document.querySelector("#members-select-container input").value)
+    window.location.search = urlParams
+
+}
+
 
 startDate = urlParams.get("start");
 endDate = urlParams.get("end");

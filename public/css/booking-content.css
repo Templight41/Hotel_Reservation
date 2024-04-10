@@ -182,6 +182,7 @@ a {
     display: inline-block;
     border: 1px solid black;
     border-radius: 4px;
+    padding: 2px 8px;
     display: none !important;
 }
 
@@ -194,6 +195,24 @@ a {
     width: 28px;
     height: 24px;
     padding: 1px 10px;
+    border: transparent;
+}
+
+.members-select-container > input:focus {
+    outline: none;
+}
+
+.members-select-container > button {
+    padding: 2px 8px !important;
+    border-radius: 8px;
+    background-color: #0066ff;
+    border: transparent;
+    color: white;
+}
+
+.members-select-container > button:hover {
+    border: transparent;
+    background-color: #0077ff;
 }
 
 .members-select-container:before {
@@ -201,7 +220,7 @@ a {
     position: absolute;
     height: 0px;
     width: 0px;
-    top: 3px;
+    top: 6px;
     left: -20px; /* 1px buffer for zooming problems while rendering*/
     border-width: 10px;
     border-color: transparent black transparent transparent;
