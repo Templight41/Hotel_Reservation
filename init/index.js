@@ -1,24 +1,24 @@
-const mysql = require('mysql2');
 require('dotenv').config();
 
 // Create the connection to the database
-const connection = mysql.createConnection(process.env.DATABASE_URL);
+const supabase = require('@supabase/supabase-js').createClient(process.env.SUPABASE_DB_URL, process.env.SUPABASE_KEY);
 
 const {rooms} = require('./data.js');
 
-const query = "INSERT INTO rooms (id, name, img, beds, people, size, view, price) VALUES ?";
+const initDB = async () => {
 
-const initDB = () => {
-    connection.query("DELETE FROM rooms", function (err, results) {
-        if (err) throw err;
-        console.log(results);
-    })
+    await supabase
+        .from("rooms")
+        .delete()
+        .then(({ data, error }) => {
+            console.log(data)
+        })
 
-    connection.query(query, [rooms], function (err, results) {
-        if (err) throw err;
-        console.log(results);
-    });
-
-    connection.end();
+    await supabase
+        .from("rooms")
+        .insert(rooms)
+        .then(({ data, error }) => {
+            console.log(data)
+        })
 }
 initDB();
