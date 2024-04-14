@@ -31,14 +31,17 @@
                     <div class="booking-right-container" id="<%=booking.roomid%>">
                         <div class="booking-inner-left">
                             <img src="./assets/loader.gif" height="150" width="200" >
-                            <div class="room-info">
-                                <h4 class="room-name"></h4>
-                                <p class="amount-paid">Amount paid - &#x20b9; <%=booking.amount%></p>
-                                <p>Check in - <%=booking.checkin%><br>Check out - <%=booking.checkout%></p>
+                            <div class="room-info-container">
+                                <div class="room-info">
+                                    <h4 class="room-name"></h4>
+                                    <p class="amount-paid">Amount paid - &#x20b9; <%=booking.amount%></p>
+                                    <p>Check in - <%=booking.checkin%><br>Check out - <%=booking.checkout%></p>
+                                </div>
+                                <button onclick=deleteBooking(this.attributes.orderid.value) orderid="<%=booking.orderid%>">Cancel/Delete</button>
+
                             </div>
 
                         </div>
-                        <button onclick=deleteBooking("<%=booking.orderid%>") orderid="<%=booking.orderid%>">Cancel/Delete</button>
                     </div>
                 <%})%>
             </div>
