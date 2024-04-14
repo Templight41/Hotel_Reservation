@@ -31,9 +31,6 @@ function deleteBooking(orderid) {
         window.location.href = "/profile"
     })
     .catch((err) => {
-        if(err.response.status == 404) {
-            window.location.href = "/profile"
-        }
-        console.log(err)
+        window.location.href = "/profile"
     })
 }
