@@ -134,8 +134,7 @@ app.get("/database-testing", (req, res) => {
   const { data, error } = supabase
     .from('users')
     .select()
-  
-  console.log(data[0].email)
+  res.send("database is working")
 })
 
 app.get("/:any", (req, res) => {
